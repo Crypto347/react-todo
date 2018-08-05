@@ -6,7 +6,6 @@ class List extends Component {
     constructor() {
         super();
         this.state = {
-            names : ["Humay1","Humay2"],
             input:""
         }
     }
@@ -19,17 +18,13 @@ class List extends Component {
     };
 
     handleClick=()=>{
-        const names = this.state.names.map((name)=>name);
-        names.push(this.state.input);
-        this.setState({
-            names: names
-        })
+        this.props.onAdd(this.state.input)
     }
 
     renderList=()=>{
-        const list = this.state.names.map((n,i)=>{
+        const list = this.props.todos.map((n,i)=>{
             return (
-                <li key ={i} onClick={this.deleteElement.bind(this,i)}>
+                <li key ={i}>
                     {n}
                 </li>
             );
@@ -41,14 +36,6 @@ class List extends Component {
             </ul>
         );
     }
-
-  deleteElement(i){
-    const delEl= this.state.names.map((name)=>name);
-    delEl.splice(i,1);
-    this.setState({
-        names: delEl
-    });
-  }  
 
     render() {
         return (

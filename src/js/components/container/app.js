@@ -2,29 +2,44 @@ import React, {
     Component
 } from "react";
 
-import List from "./list";
+import {
+    connect
+} from 'react-redux';
+ 
+import {
+    bindActionCreators
+} from 'redux';
+
+import * as Actions from '../../actions/todo.actions';
+
+import List from './list';
 
 class App extends Component {
     constructor() {
-        super();
-        this.state = {
-            b:19
-           
-        }
-         
+        super();        
     }
     
-    // addName(){
-    //     this.setState({names: this.state.names.push()})
-    // }
     render() {
         return (
             <div>
-                <List a={this.state.b}>
+                <List todos={this.props.todos} onAdd={this.props.actions.addTodo}>
+                </List>
+                <List todos={this.props.todos} onAdd={this.props.actions.addTodo}>
                 </List>
             </div>
         );
     }
 }
 
-export default App;
+export default connect(
+    (state)=>{
+        return {
+            todos: state.todos
+        };
+    },
+    (dispatch)=>{
+        return {
+            actions: bindActionCreators(Actions, dispatch)
+        };
+    }
+)(App);
