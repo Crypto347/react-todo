@@ -47,3 +47,10 @@ class List extends Component {
 }
 
 export default List;
+
+
+let a = ['z','x','c'];
+
+for(var i = 0; i<a.length; i++){
+console.log(a[i]);
+}
